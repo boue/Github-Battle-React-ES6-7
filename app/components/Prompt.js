@@ -1,6 +1,6 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
-var transparentBg = require('../styles').transparentBg;
+import React, { PropTypes } from 'react'
+import { transparentBg } from '../styles' 
+// eqls var transparentBg = require('../styles').transparentBg;
 
 function Prompt (props) {
   return (
@@ -36,4 +36,4 @@ Prompt.propTypes = {
   username: PropTypes.string.isRequired,
 }
 
-module.exports = Prompt
+export default Prompt
