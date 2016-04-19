@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react'
 
-function UserDetails (user) {
-  //create variables that are properties on this user obj (this is destructuring)
-  const { score, info } = user
+//same as passing user as arg and then const { score, info } = user before return
+function UserDetails ({score, info}) {
   return (
     <div>
       {!!score && <li className="list-group-item"><h3>Score: {score}</h3></li>}

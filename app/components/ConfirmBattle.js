@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
-import styles = from '../styles'
-import UserDetails = from './UserDetails'
-import UserDetailsWrapper = from './UserDetailsWrapper'
-import MainContainer = from './MainContainer'
-import Loading = from './Loading'
+import styles from '../styles'
+import UserDetails from './UserDetails'
+import UserDetailsWrapper from './UserDetailsWrapper'
+import MainContainer from './MainContainer'
+import Loading from './Loading'
 
 function ConfirmBattle (props) {
   return props.isLoading === true
