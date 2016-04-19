@@ -1,7 +1,8 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
+import React, { PropTypes } from 'react'
 
-var styles = {
+//doesn't matter if it's block or func scope use const as much as possible
+//const you can change the values of these properties but not reference
+const styles = {
   container: {
     position: 'fixed',
     left: 0,
@@ -18,7 +19,7 @@ var styles = {
   }
 }
 
-var Loading = React.createClass({
+const Loading = React.createClass({
   //optional
   propTypes: {
     text: PropTypes.string,
@@ -39,7 +40,7 @@ var Loading = React.createClass({
     }
   },
   componentDidMount: function () {
-    var stopper = this.originalText + '...'
+    const stopper = this.originalText + '...'
     this.interval = setInterval(function () {
       if (this.state.text === stopper) {
         this.setState({
@@ -64,4 +65,4 @@ var Loading = React.createClass({
   }
 })
 
-module.exports = Loading
+export default Loading

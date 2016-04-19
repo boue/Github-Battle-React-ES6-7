@@ -5,7 +5,7 @@ var UserDetails = require('./UserDetails');
 var UserDetailsWrapper = require('./UserDetailsWrapper');
 var Link = require('react-router').Link;
 var MainContainer = require('./MainContainer');
-var Loading = require('./Loading');
+import Loading from './Loading'
 
 function StartOver(){
   return (
