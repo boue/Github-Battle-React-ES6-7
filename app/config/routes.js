@@ -9,7 +9,7 @@ var IndexRoute = ReactRouter.IndexRoute;
 import Main from '../components/Main'
 import Home from '../components/Home'
 var PromptContainer = require('../containers/PromptContainer');
-var ConfirmBattleContainer = require('../containers/ConfirmBattleContainer');
+import ConfirmBattleContainer from '../containers/ConfirmBattleContainer'
 var ResultsContainer = require('../containers/ResultsContainer');
 
 var routes = (
