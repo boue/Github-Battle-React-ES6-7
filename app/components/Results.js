@@ -1,9 +1,8 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
-var styles = require('../styles');
-var UserDetails = require('./UserDetails');
-var UserDetailsWrapper = require('./UserDetailsWrapper');
-var Link = require('react-router').Link;
+import React, { PropTypes } from 'react'
+import styles from '../styles'
+import UserDetails from './UserDetails'
+import UserDetailsWrapper from './UserDetailsWrapper'
+import { Link } from 'react-router'
 import MainContainer from './MainContainer'
 import Loading from './Loading'
 
@@ -32,8 +31,10 @@ function Results (props) {
       </MainContainer>
     )
   }
-  var winningIndex = props.scores[0] > props.scores[1] ? 0 : 1;
-  var losingIndex = winningIndex === 0 ? 1 : 0;
+
+  const winningIndex = props.scores[0] > props.scores[1] ? 0 : 1;
+  const losingIndex = winningIndex === 0 ? 1 : 0;
+
   return (
     <MainContainer>
       <h1>Results</h1>
@@ -55,4 +56,4 @@ Results.propTypes = {
   scores: PropTypes.array.isRequired
 }
 
-module.exports = Results;
+export default Results

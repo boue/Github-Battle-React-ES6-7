@@ -1,5 +1,5 @@
 var React = require('react');
-var Results = require('../components/Results');
+import Results from '../components/Results'
 var githubHelpers = require('../utils/githubHelpers');
 
 var ResultsContainer = React.createClass({
