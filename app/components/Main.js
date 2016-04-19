@@ -1,10 +1,10 @@
-var React = require('react');
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-require('../main.css'); //webpack enabled 
+import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import '../main.css' //webpack enabled 
 
 //Main needs to take responsibility for rendering child component
 //need child el to have key, clone element and add attribute key
-var Main = React.createClass({
+const Main = React.createClass({
   render: function(){
     return (
       <div className='main-container'>
@@ -19,4 +19,4 @@ var Main = React.createClass({
   }
 });
 
-module.exports = Main;
+export default Main
