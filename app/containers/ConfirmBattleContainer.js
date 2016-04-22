@@ -13,15 +13,19 @@ const ConfirmBattleContainer = React.createClass({
     }
   },
   //you can run .then on it because it returns a promise
-  componentDidMount () {
+  async componentDidMount () {
     const { query } = this.props.location
-    getPlayersInfo([query.playerOne, query.playerTwo])
-      .then((players) => {
-        this.setState({
-          isLoading: false,
-          playersInfo: [players[0], players[1]]
-        })
+    //lets write async code in synch manner
+    try {
+      //pause execution until getPlayersInfo is resolved
+      const players = await getPlayersInfo([query.playerOne, query.playerTwo])
+      this.setState({
+        isLoading: false,
+        playersInfo: [players[0], players[1]]
       })
+    } catch (error) {
+      console.warn('Error in ConfirmBattleContainer: ', error)
+    }
   },
   //react-router lets you push props to new routes (data we got from promises)
   handleInitiateBattle() {
