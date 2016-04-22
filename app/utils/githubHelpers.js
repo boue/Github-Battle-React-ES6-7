@@ -1,4 +1,4 @@
-var axios = require('axios');
+import axios from 'axios'
 
 function getUserInfo(username){
   return axios.get('https://api.github.com/users/' + username)
@@ -33,29 +33,24 @@ function calculateScores(players){
   ]
 }
 
-var helpers = {
-  getPlayersInfo: function(players) {
-    //axios.all is given an array of promises and when each are done resolving
-    //.then function is going to run
-    return axios.all(players.map(function(username){
-      return getUserInfo(username)
-    })).then(function (info) {
-      return info.map(function (user) {
-        return user.data;
-      })
-    }).catch(function(err){
-      console.warn('ERROR in getPlayersInfo', err);
+export function getPlayersInfo (players) {
+  //axios.all is given an array of promises and when each are done resolving
+  //.then function is going to run
+  return axios.all(players.map(function(username){
+    return getUserInfo(username)
+  })).then(function (info) {
+    return info.map(function (user) {
+      return user.data;
     })
-  },
-  battle: function(players){
-    //both players are promises
-    var playerOneData = getPlayersData(players[0]);
-    var playerTwoData = getPlayersData(players[1]);
-    //when both promises resolve
-    return axios.all([playerOneData, playerTwoData])
-      .then(calculateScores)
-      .catch(function (err) {console.warn('Error in getPlayersInfo: ', err)})
-  }
-};
-
-module.exports = helpers;
+  })
+  .catch(function(err) {console.warn('ERROR in getPlayersInfo', err)})
+}
+export function battle (players){
+  //both players are promises
+  const playerOneData = getPlayersData(players[0]);
+  const playerTwoData = getPlayersData(players[1]);
+  //when both promises resolve
+  return axios.all([playerOneData, playerTwoData])
+    .then(calculateScores)
+    .catch(function (err) {console.warn('Error in getPlayersInfo: ', err)})
+}
