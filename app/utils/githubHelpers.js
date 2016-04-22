@@ -1,12 +1,12 @@
 import axios from 'axios'
 
-function getUserInfo(username){
-  return axios.get('https://api.github.com/users/' + username)
+function getUserInfo(username = 'boue'){
+  return axios.get(`https://api.github.com/users/${username}`)
 }
 
 //fetch github to get usernames repos
-function getRepos(username){
- return axios.get('https://api.github.com/users/' + username + '/repos?per_page=100') 
+function getRepos(username = 'boue'){
+ return axios.get(`https://api.github.com/users/${username}/repos?per_page=100`) 
 }
 //calculate all the stars user has
 //arrow function returns anything on its line
@@ -20,7 +20,7 @@ function getPlayersData(player){
     .then((totalStars) => (
       {
         followers: player.followers,
-        totalStars: totalStars
+        totalStars
       }
     ))
 }
