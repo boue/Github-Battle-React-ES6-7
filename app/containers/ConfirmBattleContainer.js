@@ -1,17 +1,15 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ConfirmBattle from '../components/ConfirmBattle'
 import { getPlayersInfo } from '../utils/githubHelpers'
 
-const ConfirmBattleContainer = React.createClass({
-  contextTypes: {
-    router: React.PropTypes.object.isRequired
-  },
-  getInitialState () {
-    return {
+class ConfirmBattleContainer extends Component {
+  constructor () {
+    super()
+    this.state = {
       isLoading: true,
       playersInfo: [],
     }
-  },
+  }
   //you can run .then on it because it returns a promise
   async componentDidMount () {
     const { query } = this.props.location
@@ -26,7 +24,7 @@ const ConfirmBattleContainer = React.createClass({
     } catch (error) {
       console.warn('Error in ConfirmBattleContainer: ', error)
     }
-  },
+  }
   //react-router lets you push props to new routes (data we got from promises)
   handleInitiateBattle() {
     this.context.router.push({
@@ -35,15 +33,20 @@ const ConfirmBattleContainer = React.createClass({
         playersInfo: this.state.playersInfo
       }
     })
-  },
+  }
   render () {
     return (
       <ConfirmBattle
         isLoading={this.state.isLoading}
-        onInitiateBattle={this.handleInitiateBattle}
+        //classes in es6 don't autobind this so now we know its good
+        onInitiateBattle={() => this.handleInitiateBattle()}
         playersInfo={this.state.playersInfo} />
     )
   }
-});
+}
+
+ConfirmBattleContainer.contextTypes = {
+  router: React.PropTypes.object.isRequired
+}
 
 export default ConfirmBattleContainer
