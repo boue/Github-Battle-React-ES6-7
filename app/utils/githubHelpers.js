@@ -14,15 +14,17 @@ function getTotalStars(repos) {
   return repos.data.reduce((prev, current) => prev + current.stargazers_count, 0) //start at 0
 }  
 //fetch repos and pass that info to getTotalstars and return obj
-function getPlayersData(player){
-  return getRepos(player.login)
-    .then(getTotalStars)
-    .then((totalStars) => (
-      {
-        followers: player.followers,
-        totalStars
-      }
-    ))
+async function getPlayersData(player){
+  try {
+    const repos = await getRepos(player.login)
+    const totalStars = await getTotalStars(repos)
+    return {
+      followers: player.followers,
+      totalStars
+    }  
+  } catch (error) {
+    console.log('githubHelpers error in getPlayersData ', error)
+  }
 }
 //take in both players and return array that determins winner
 function calculateScores(players){
@@ -32,19 +34,23 @@ function calculateScores(players){
   ]
 }
 
-export function getPlayersInfo (players) {
-  //axios.all is given an array of promises and when each are done resolving
-  //.then function is going to run
-  return axios.all(players.map((username) => getUserInfo(username)))
-    .then((info) => info.map((user) => user.data))
-    .catch(function(err) {console.warn('ERROR in getPlayersInfo', err)})
+export async function getPlayersInfo (players) {
+  try {
+    const info = Promise.all(players.map((username) => getUserInfo(username)))
+    return info.map((user) => user.data)
+  } catch (error) {
+    console.warn('Error in getPlayersInfo: ', error)
+  } 
 }
-export function battle (players){
+
+export async function battle (players){
   //both players are promises
-  const playerOneData = getPlayersData(players[0]);
-  const playerTwoData = getPlayersData(players[1]);
-  //when both promises resolve
-  return axios.all([playerOneData, playerTwoData])
-    .then(calculateScores)
-    .catch(function (err) {console.warn('Error in getPlayersInfo: ', err)})
+  try {
+    const playerOneData = getPlayersData(players[0]);
+    const playerTwoData = getPlayersData(players[1]);
+    const data = await Promise.all([playerOneData, playerTwoData])
+    return await calculateScores(data)  
+  } catch (error) {
+    console.warn('Error in battle: ', error)
+  }
 }
